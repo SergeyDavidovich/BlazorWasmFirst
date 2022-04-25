@@ -1,0 +1,53 @@
+﻿@* https://docs.microsoft.com/ru-ru/aspnet/core/blazor/debug?view=aspnetcore-6.0&tabs=visual-studio *@
+
+@page "/{hello?}"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+<p2 class=time>@now</p2>
+<hr />
+<p>Welcome to your new app</p>
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+<style>
+    .time{
+        color:red;
+        font-family:'Century Gothic';
+        font-size:2em;
+        font-weight:900;
+    }
+</style>
+
+@code {
+
+    string? now;
+
+    protected override void OnInitialized()
+    {
+#if DEBUG
+        Thread.Sleep(10000);
+#endif
+
+        now = Hello + " " + DateTime.Now.ToLongTimeString();
+    }
+    protected override void OnParametersSet()
+{
+    Hello = Hello ?? "" ;
+}
+
+    [Parameter]
+    public string? Hello { get; set; }
+}
+
+@*
+
+    protected override async Task OnInitializedAsync()
+    {
+    #if DEBUG
+        await Task.Delay(10000);
+    #endif
+    ...
+    }
+
+*@
