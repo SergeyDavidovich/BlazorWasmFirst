@@ -1,1 +1,1 @@
-BlazorWasmFirst
+Blazor Wasm First
